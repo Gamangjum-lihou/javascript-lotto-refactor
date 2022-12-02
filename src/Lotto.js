@@ -1,9 +1,12 @@
 class Lotto {
-  #numbers;
+  #numbers = {
+    main: null,
+    bonus: null,
+  };
 
-  constructor(numbers) {
-    this.validate(numbers);
-    this.#numbers = numbers;
+  constructor(mainNumber, bonusNumber) {
+    this.#numbers.main = mainNumber;
+    this.#numbers.bonus = bonusNumber;
   }
 
   // TODO: 추가 기능 구현

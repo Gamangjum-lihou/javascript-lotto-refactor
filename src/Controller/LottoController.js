@@ -1,7 +1,7 @@
 const Lotto = require('../Lotto');
 const Player = require('../Player');
 const getTotal = require('../Util/getTotal');
-const { readLotteryPrice, readWinLotteryMainNumber, readWinLotteryBonusNumber } = require('../View/InputView');
+const { readLotteryPrice, readMainNumber, readBonusNumber } = require('../View/InputView');
 const { printCreatedLotteryNumber, printResult, printMargin, exit } = require('../View/OutputView');
 
 class LottoController {
@@ -14,7 +14,7 @@ class LottoController {
   }
 
   getLottoPrice = () => {
-    readLotteryPrice(this.sendLotteryPrice);
+    readLotteryPrice(this.getLottoPrice, this.sendLotteryPrice);
   };
 
   sendLotteryPrice = (price) => {
@@ -30,11 +30,11 @@ class LottoController {
   };
 
   getLotteryMainNumber = () => {
-    readWinLotteryMainNumber(this.getLotteryBonusNumber);
+    readMainNumber(this.getLotteryMainNumber, this.getLotteryBonusNumber);
   };
 
   getLotteryBonusNumber = (mainNumber) => {
-    readWinLotteryBonusNumber(mainNumber, this.sendWinLottery);
+    readBonusNumber(mainNumber, this.getLotteryBonusNumber, this.sendWinLottery);
   };
 
   sendWinLottery = (mainNumber, bonusNumber) => {

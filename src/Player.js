@@ -5,21 +5,19 @@ class Player {
 
   #numbers;
 
-  storeMoney(money) {
+  storeMoney = (money) => {
     this.#money = money;
     this.#numbers = this.generateLottery();
-  }
+  };
 
-  generateLottery() {
+  generateLottery = () => {
     Array.from({ length: this.#money / 1000 }, () => {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       return numbers.sort();
     });
-  }
+  };
 
-  getPlayerLottery() {
-    return this.#numbers;
-  }
+  getPlayerLottery = () => this.#numbers;
 }
 
 module.exports = Player;

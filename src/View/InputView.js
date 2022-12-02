@@ -8,13 +8,13 @@ const InputView = {
   },
 
   readWinLotteryMainNumber(callback) {
-    Console.readLine('당첨 번호를 입력해 주세요.\n', (value) => {
+    Console.readLine('\n당첨 번호를 입력해 주세요.\n', (value) => {
       callback(value);
     });
   },
 
   readWinLotteryBonusNumber(mainNumber, callback) {
-    Console.readLine('보너스 번호를 입력해 주세요.\n', (value) => {
+    Console.readLine('\n보너스 번호를 입력해 주세요.\n', (value) => {
       callback(mainNumber, value);
     });
   },

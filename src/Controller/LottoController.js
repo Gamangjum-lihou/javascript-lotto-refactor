@@ -23,8 +23,8 @@ class LottoController {
 
   printPlayerLottery = () => {
     const playerLottery = this.#Player.getPlayerLottery();
-    const playerMoney = this.#Player.getPlayerLotteryPrice();
-    printCreatedLotteryNumber(playerLottery, playerMoney);
+    const playerLotteryAmount = this.#Player.getPlayerLotteryAmount();
+    printCreatedLotteryNumber(playerLottery, playerLotteryAmount);
     this.getLotteryMainNumber();
   };
 

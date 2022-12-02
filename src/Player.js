@@ -18,7 +18,7 @@ class Player {
 
   getPlayerLottery = () => this.#numbers;
 
-  getPlayerLotteryPrice = () => this.#money;
+  getPlayerLotteryAmount = () => this.#money / 1000;
 }
 
 module.exports = Player;

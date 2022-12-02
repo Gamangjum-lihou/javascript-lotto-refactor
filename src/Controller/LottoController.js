@@ -38,6 +38,16 @@ class LottoController {
   sendWinLottery = (mainNumber, bonusNumber) => {
     this.#Lotto = new Lotto(mainNumber, bonusNumber);
   };
+
+  compareNumber = () => {
+    const playerLottery = this.#Player.getPlayerLottery();
+    const winList = this.#Lotto.compare(playerLottery);
+    this.printWinList(winList);
+  };
+
+  printWinList = (winList) => {
+    printResult(winList);
+  };
 }
 
 module.exports = LottoController;

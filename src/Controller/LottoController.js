@@ -1,5 +1,6 @@
 const Lotto = require('../Lotto');
 const Player = require('../Player');
+const getTotal = require('../Util/getTotal');
 const { readLotteryPrice, readWinLotteryMainNumber, readWinLotteryBonusNumber } = require('../View/InputView');
 const { printCreatedLotteryNumber, printResult, printMargin, exit } = require('../View/OutputView');
 
@@ -44,11 +45,14 @@ class LottoController {
   compareNumber = () => {
     const playerLottery = this.#Player.getPlayerLottery();
     const winList = this.#Lotto.compare(playerLottery);
-    this.printWinList(winList);
+    const result = getTotal.calculate(winList);
+    this.printResults(result);
   };
 
-  printWinList = (winList) => {
-    printResult(winList);
+  printResults = ({ rank, total }) => {
+    const lottoPrice = this.#Player.getPlayerMoney();
+    printResult(rank);
+    printMargin(((total / lottoPrice) * 100).toFixed(1));
     exit();
   };
 }

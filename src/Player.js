@@ -10,14 +10,15 @@ class Player {
     this.#numbers = this.generateLottery();
   };
 
-  generateLottery = () => {
+  generateLottery = () =>
     Array.from({ length: this.#money / 1000 }, () => {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      return numbers.sort();
+      return numbers.sort((prev, cur) => prev - cur);
     });
-  };
 
   getPlayerLottery = () => this.#numbers;
+
+  getPlayerLotteryPrice = () => this.#money;
 }
 
 module.exports = Player;

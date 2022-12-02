@@ -1,3 +1,5 @@
+const compareNumber = require('./Util/compareNumber');
+
 class Lotto {
   #numbers = {
     main: null,
@@ -5,11 +7,18 @@ class Lotto {
   };
 
   constructor(mainNumber, bonusNumber) {
-    this.#numbers.main = mainNumber;
-    this.#numbers.bonus = bonusNumber;
+    this.#numbers.main = new Set(mainNumber.split(',').map(Number));
+    this.#numbers.bonus = Number(bonusNumber);
   }
 
-  // TODO: 추가 기능 구현
+  compare = (playerLottery) => {
+    const winList = [];
+    playerLottery.forEach((player) => {
+      winList.push(compareNumber(this.#numbers, player));
+    });
+
+    return winList;
+  };
 }
 
 module.exports = Lotto;

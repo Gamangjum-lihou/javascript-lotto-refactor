@@ -18,6 +18,8 @@ class Player {
 
   getPlayerLottery = () => this.#numbers;
 
+  getPlayerMoney = () => this.#money;
+
   getPlayerLotteryAmount = () => this.#money / 1000;
 }
 

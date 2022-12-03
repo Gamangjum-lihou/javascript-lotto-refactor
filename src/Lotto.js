@@ -7,7 +7,7 @@ class Lotto {
   };
 
   constructor(mainNumber, bonusNumber) {
-    this.#numbers.main = new Set(mainNumber.split(',').map(Number));
+    this.#numbers.main = new Set(mainNumber.toString().split(',').map(Number));
     this.#numbers.bonus = Number(bonusNumber);
   }
 

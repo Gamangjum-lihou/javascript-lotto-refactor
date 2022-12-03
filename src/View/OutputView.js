@@ -28,7 +28,7 @@ const OutputView = {
   },
 
   printMargin(margin) {
-    Console.print(`총 수익률은 ${margin}%입니다`);
+    Console.print(`총 수익률은 ${margin}%입니다.`);
   },
 
   exit() {

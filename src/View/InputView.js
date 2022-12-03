@@ -8,15 +8,20 @@ const {
   checkCorrectBonusNumberRange,
 } = require('../Util/Validation');
 
+const MESSAGE = Object.freeze({
+  input_start: '구입금액을 입력해 주세요.\n',
+  input_main: '\n당첨 번호를 입력해 주세요.\n',
+  input_bonus: '\n보너스 번호를 입력해 주세요.\n',
+});
+
 const InputView = {
-  readLotteryPrice(comback, callback) {
-    Console.readLine('구입금액을 입력해 주세요.\n', (value) => {
+  readLotteryPrice(comeback, callback) {
+    Console.readLine(MESSAGE.input_start, (value) => {
       try {
         InputView.lotteryPriceValidation(Number(value));
         callback(Number(value));
       } catch (e) {
-        Console.print(e.message);
-        comback();
+        InputView.errorHandler(e, comeback);
       }
     });
   },
@@ -27,13 +32,12 @@ const InputView = {
   },
 
   readMainNumber(comeback, callback) {
-    Console.readLine('\n당첨 번호를 입력해 주세요.\n', (value) => {
+    Console.readLine(MESSAGE.input_main, (value) => {
       try {
         InputView.mainNumberValidation(value.split(',').map(Number));
         callback(value);
       } catch (e) {
-        Console.print(e.message);
-        comeback();
+        InputView.errorHandler(e, comeback);
       }
     });
   },
@@ -45,13 +49,12 @@ const InputView = {
   },
 
   readBonusNumber(mainNumber, comeback, callback) {
-    Console.readLine('\n보너스 번호를 입력해 주세요.\n', (value) => {
+    Console.readLine(MESSAGE.input_bonus, (value) => {
       try {
         InputView.bonusNumberValidation(Number(value));
         callback(mainNumber, Number(value));
       } catch (e) {
-        Console.print(e.message);
-        comeback(mainNumber);
+        InputView.errorHandler(e, comeback);
       }
     });
   },
@@ -59,6 +62,11 @@ const InputView = {
   bonusNumberValidation(value) {
     checkCorrectNumber(value);
     checkCorrectBonusNumberRange(value);
+  },
+
+  errorHandler(error, callback) {
+    Console.print(error.message);
+    callback();
   },
 };
 

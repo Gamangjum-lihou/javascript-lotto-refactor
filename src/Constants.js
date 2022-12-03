@@ -7,11 +7,11 @@ const INDEX = Object.freeze({
   fail: 5,
 });
 
-const INFO = {
+const INFO = Object.freeze({
   lotto_start: 1,
   lotto_end: 45,
   lotto_size: 6,
-};
+});
 
 const UNIT = 1000;
 

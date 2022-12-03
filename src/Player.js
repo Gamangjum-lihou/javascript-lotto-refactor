@@ -1,20 +1,17 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { generateLottery } = require('./Util/LotteryGenerator');
+const { UNIT } = require('./Constants');
 
 class Player {
   #money;
 
   #numbers;
 
-  storeMoney(money) {
+  constructor(money) {
     this.#money = money;
-    this.#numbers = this.generateLottery();
   }
 
-  generateLottery() {
-    Array.from({ length: this.#money / 1000 }, () => {
-      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      return numbers.sort((prev, cur) => prev - cur);
-    });
+  createLottery(length) {
+    this.#numbers = generateLottery(length);
   }
 
   getPlayerLottery() {
@@ -26,7 +23,7 @@ class Player {
   }
 
   getPlayerLotteryAmount() {
-    return this.#money / 1000;
+    return this.#money / UNIT;
   }
 }
 

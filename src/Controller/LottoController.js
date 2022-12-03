@@ -13,48 +13,48 @@ class LottoController {
     this.#Player = new Player();
   }
 
-  getLottoPrice = () => {
-    readLotteryPrice(this.getLottoPrice, this.sendLotteryPrice);
-  };
+  getLottoPrice() {
+    readLotteryPrice(this.getLottoPrice.bind(this), this.sendLotteryPrice.bind(this));
+  }
 
-  sendLotteryPrice = (price) => {
+  sendLotteryPrice(price) {
     this.#Player.storeMoney(price);
     this.printPlayerLottery();
-  };
+  }
 
-  printPlayerLottery = () => {
+  printPlayerLottery() {
     const playerLottery = this.#Player.getPlayerLottery();
     const playerLotteryAmount = this.#Player.getPlayerLotteryAmount();
     printCreatedLotteryNumber(playerLottery, playerLotteryAmount);
     this.getLotteryMainNumber();
-  };
+  }
 
-  getLotteryMainNumber = () => {
-    readMainNumber(this.getLotteryMainNumber, this.getLotteryBonusNumber);
-  };
+  getLotteryMainNumber() {
+    readMainNumber(this.getLotteryMainNumber.bind(this), this.getLotteryBonusNumber.bind(this));
+  }
 
-  getLotteryBonusNumber = (mainNumber) => {
-    readBonusNumber(mainNumber, this.getLotteryBonusNumber, this.sendWinLottery);
-  };
+  getLotteryBonusNumber(mainNumber) {
+    readBonusNumber(mainNumber, this.getLotteryBonusNumber.bind(this), this.sendWinLottery.bind(this));
+  }
 
-  sendWinLottery = (mainNumber, bonusNumber) => {
+  sendWinLottery(mainNumber, bonusNumber) {
     this.#Lotto = new Lotto(mainNumber, bonusNumber);
     this.compareNumber();
-  };
+  }
 
-  compareNumber = () => {
+  compareNumber() {
     const playerLottery = this.#Player.getPlayerLottery();
     const winList = this.#Lotto.compare(playerLottery);
     const result = getTotal.calculate(winList);
     this.printResults(result);
-  };
+  }
 
-  printResults = ({ rank, total }) => {
+  printResults({ rank, total }) {
     const lottoPrice = this.#Player.getPlayerMoney();
     printResult(rank);
     printMargin(((total / lottoPrice) * 100).toFixed(1));
     exit();
-  };
+  }
 }
 
 module.exports = LottoController;

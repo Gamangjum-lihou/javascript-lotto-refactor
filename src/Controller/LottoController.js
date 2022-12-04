@@ -3,7 +3,6 @@ const Player = require('../Player');
 const getTotal = require('../Util/getTotal');
 const { readLotteryPrice, readMainNumber, readBonusNumber } = require('../View/InputView');
 const { printCreatedLotteryNumber, printResult, printMargin, exit } = require('../View/OutputView');
-const { UNIT } = require('../Constants');
 
 class LottoController {
   #Lotto;
@@ -16,7 +15,6 @@ class LottoController {
 
   sendLotteryPrice(price) {
     this.#Player = new Player(price);
-    this.#Player.createLottery(price / UNIT);
     this.printPlayerLottery();
   }
 

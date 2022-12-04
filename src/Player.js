@@ -8,10 +8,11 @@ class Player {
 
   constructor(money) {
     this.#money = money;
+    this.#numbers = this.createLottery(money / UNIT);
   }
 
   createLottery(length) {
-    this.#numbers = generateLottery(length);
+    return generateLottery(length);
   }
 
   getPlayerLottery() {

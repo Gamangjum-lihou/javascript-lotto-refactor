@@ -10,9 +10,9 @@ class Money {
   }
 
   #validate(money) {
-    if (!this.#isUnit(money) || this.#isLimit(money)) {
-      throw new ValidationError(ERROR.not_number);
-    }
+    if (!this.#isUnit(money)) throw new ValidationError(ERROR.money_unit);
+
+    if (this.#isLimit(money)) throw new ValidationError(ERROR.money_limit);
   }
 
   #isUnit(money) {

@@ -1,8 +1,8 @@
-const View = require('./view/View');
+const InputView = require('./view/InputView');
 
 class App {
   play() {
-    const view = new View();
+    const view = new InputView();
     view.inputMoney();
   }
 }

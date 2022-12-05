@@ -1,7 +1,7 @@
 const ValidationError = require('../../error/ValidationError');
 const { ERROR } = require('../../utils/constants');
 
-const NumberValidator = {
+const WinNumberValidator = {
   isNumber(input) {
     const inputNumber = Math.floor(Number(input));
 
@@ -9,10 +9,12 @@ const NumberValidator = {
   },
 
   validate(input) {
-    if (!NumberValidator.isNumber(input)) {
-      throw new ValidationError(ERROR.not_number);
-    }
+    input.split(',').forEach((num) => {
+      if (!WinNumberValidator.isNumber(num)) {
+        throw new ValidationError(ERROR.win_number);
+      }
+    });
   },
 };
 
-module.exports = NumberValidator;
+module.exports = WinNumberValidator;

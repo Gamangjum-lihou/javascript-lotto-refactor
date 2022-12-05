@@ -22,6 +22,18 @@ class LottoController {
   getLottos(count) {
     return this.#lottoService.getLottos(count);
   }
+
+  inputWinNumbers(input) {
+    return this.#lottoService.inputWinNumbers(input);
+  }
+
+  inputBonusNumber(input) {
+    this.#lottoService.inputBonusNumber(input);
+  }
+
+  getStatics() {
+    this.#lottoService.getStatics();
+  }
 }
 
 module.exports = LottoController;

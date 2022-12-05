@@ -1,3 +1,5 @@
+const UNIT = 1000;
+
 const INDEX = Object.freeze({
   first: 0,
   second: 1,
@@ -13,10 +15,18 @@ const INFO = Object.freeze({
   lotto_size: 6,
 });
 
-const UNIT = 1000;
+const PRIZE = Object.freeze({
+  first: 2000000000,
+  second: 30000000,
+  third: 1500000,
+  fourth: 50000,
+  fifth: 5000,
+  fail: 0,
+});
 
 module.exports = {
-  INDEX,
   UNIT,
+  INDEX,
   INFO,
+  PRIZE,
 };

@@ -1,4 +1,4 @@
-const compareNumber = ({ main, bonus }, player) => {
+function compareNumber({ main, bonus }, player) {
   let mainCount = 0;
   let bonusCount = 0;
   player.forEach((number) => {
@@ -7,6 +7,6 @@ const compareNumber = ({ main, bonus }, player) => {
   });
 
   return { mainCount, bonusCount };
-};
+}
 
 module.exports = compareNumber;

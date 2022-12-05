@@ -1,6 +1,6 @@
 const Lotto = require('../Lotto');
 const Player = require('../Player');
-const getTotal = require('../Util/getTotal');
+const TotalGenerator = require('../Util/TotalGenerator');
 const { readLotteryPrice, readMainNumber, readBonusNumber } = require('../View/InputView');
 const { printCreatedLotteryNumber, printResult, printMargin, exit } = require('../View/OutputView');
 
@@ -41,7 +41,7 @@ class LottoController {
   compareNumber() {
     const playerLottery = this.#Player.getPlayerLottery();
     const winList = this.#Lotto.compare(playerLottery);
-    const result = getTotal.calculate(winList);
+    const result = TotalGenerator.generateTotal(winList);
     this.printResults(result);
   }
 

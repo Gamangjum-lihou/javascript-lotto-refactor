@@ -1,13 +1,4 @@
-const { INDEX } = require('../Constants');
-
-const PRIZE = Object.freeze({
-  first: 2000000000,
-  second: 30000000,
-  third: 1500000,
-  fourth: 50000,
-  fifth: 5000,
-  fail: 0,
-});
+const { INDEX, PRIZE } = require('../Constants');
 
 const MATCH = Object.freeze({
   six: 6,
@@ -16,13 +7,13 @@ const MATCH = Object.freeze({
   three: 3,
 });
 
-const getTotal = {
-  calculate(winList) {
+const TotalGenerator = {
+  generateTotal(winList) {
     const rank = [0, 0, 0, 0, 0, 0];
     const rankPrize = Object.values(PRIZE);
     let total = 0;
     winList.forEach(({ mainCount, bonusCount }) => {
-      const index = getTotal.getIndex(mainCount, bonusCount);
+      const index = TotalGenerator.getIndex(mainCount, bonusCount);
       rank[index] += 1;
       total += rankPrize[index];
     });
@@ -39,4 +30,4 @@ const getTotal = {
   },
 };
 
-module.exports = getTotal;
+module.exports = TotalGenerator;

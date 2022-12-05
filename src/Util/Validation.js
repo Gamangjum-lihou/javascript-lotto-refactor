@@ -7,33 +7,33 @@ const MESSAGE = Object.freeze({
   invalid_range: '[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.',
 });
 
-const checkCorrectNumber = (input) => {
+function checkCorrectNumber(input) {
   if (Number.isNaN(input)) throw new Error(MESSAGE.invalid_type);
-};
+}
 
-const checkCorrectUnit = (input) => {
+function checkCorrectUnit(input) {
   if (input % UNIT !== 0) throw new Error(MESSAGE.invalid_price_unit);
-};
+}
 
-const checkCorrectMainNumbersize = (input) => {
+function checkCorrectMainNumbersize(input) {
   if (input.length !== INFO.lotto_size) throw new Error(MESSAGE.invalid_main_size);
-};
+}
 
-const checkCorrectMainNumber = (input) => {
+function checkCorrectMainNumber(input) {
   input.forEach((number) => {
     if (Number.isNaN(number)) throw new Error(MESSAGE.invalid_type);
   });
-};
+}
 
-const checkCorrectMainNumberRange = (input) => {
+function checkCorrectMainNumberRange(input) {
   input.forEach((number) => {
     if (number < INFO.lotto_start || number > INFO.lotto_end) throw new Error(MESSAGE.invalid_range);
   });
-};
+}
 
-const checkCorrectBonusNumberRange = (input) => {
+function checkCorrectBonusNumberRange(input) {
   if (input < INFO.lotto_start || input > INFO.lotto_end) throw new Error(MESSAGE.invalid_range);
-};
+}
 
 module.exports = {
   checkCorrectNumber,

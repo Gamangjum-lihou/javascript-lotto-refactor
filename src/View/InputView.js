@@ -54,7 +54,8 @@ const InputView = {
         InputView.bonusNumberValidation(Number(value));
         callback(mainNumber, Number(value));
       } catch (e) {
-        InputView.errorHandler(e, comeback);
+        Console.print(e.message);
+        comeback(mainNumber);
       }
     });
   },

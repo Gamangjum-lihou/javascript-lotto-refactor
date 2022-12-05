@@ -1,5 +1,6 @@
 const LottoService = require('./LottoService');
 const lottoView = require('./view/lottoView');
+const rankView = require('./view/rankView');
 const { print } = require('./view/OutputView');
 
 class LottoController {
@@ -32,7 +33,9 @@ class LottoController {
   }
 
   getStatics() {
-    this.#lottoService.getStatics();
+    const statics = this.#lottoService.getStatics();
+    const rank = rankView.getView(statics);
+    print(rank);
   }
 }
 

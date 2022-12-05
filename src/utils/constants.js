@@ -10,6 +10,15 @@ const MESSAGE = Object.freeze({
   start: '구입금액을 입력해 주세요.\n',
   buy: (num) => `\n${num}개를 구입했습니다.\n`,
   win: '\n당첨 번호를 입력해주세요.\n',
+  bonus: '\n보너스 번호를 입력해주세요.\n',
+  rank: {
+    5: (num) => `3개 일치 (5,000원) - ${num}개\n`,
+    4: (num) => `4개 일치 (50,000원) - ${num}개\n`,
+    3: (num) => `5개 일치 (1,500,000원) - ${num}개\n`,
+    2: (num) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${num}개\n`,
+    1: (num) => `6개 일치 (2,000,000,000원) - ${num}개\n`,
+  },
+  startStatics: `당첨 통계\n ---\n`,
 });
 
 const ERROR = Object.freeze({

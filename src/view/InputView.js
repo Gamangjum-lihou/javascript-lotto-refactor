@@ -23,13 +23,15 @@ class InputView {
         this.inputWinNumbers,
       );
       this.#lottoController.inputWinNumbers(input);
+      this.inputBonusNumber();
     });
   }
 
   inputBonusNumber() {
-    Console.readLine(MESSAGE.win, (input) => {
+    Console.readLine(MESSAGE.bonus, (input) => {
       handleError(() => NumberValidator.validate(input), this.inputBonusNumber);
       this.#lottoController.inputBonusNumber(input);
+      this.#lottoController.getStatics();
     });
   }
 }

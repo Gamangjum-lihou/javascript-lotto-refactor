@@ -24,6 +24,15 @@ class Lotto {
     return new Set(numbers).size !== numbers.length;
   }
 
+  getDuplicate(winLotto) {
+    return this.#numbers.filter((number) => winLotto.#numbers.includes(number))
+      .length;
+  }
+
+  hasNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
+
   getLotto() {
     return this.#numbers;
   }

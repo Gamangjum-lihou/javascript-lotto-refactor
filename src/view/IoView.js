@@ -1,6 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 const errorHandler = require('../ErrorHandler');
 
+const STATIC_MESSAGE = [
+  '3개 일치 (5,000원) -',
+  '4개 일치 (50,000원) -',
+  '5개 일치 (1,500,000원) -',
+  '5개 일치, 보너스 볼 일치 (30,000,000원) -',
+  '6개 일치 (2,000,000,000원) -',
+];
+
 const IoView = {
   readPurChase(callback) {
     Console.readLine('구입금액을 입력해 주세요.\n', (input) => {
@@ -24,11 +32,9 @@ const IoView = {
   printWinningStatistics(winningStatistics) {
     Console.print('\n당첨 통계');
     Console.print('---');
-    Console.print(`3개 일치 (5,000원) - ${winningStatistics[0]}개`);
-    Console.print(`4개 일치 (50,000원) - ${winningStatistics[1]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${winningStatistics[2]}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${winningStatistics[3]}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${winningStatistics[4]}개`);
+    winningStatistics.forEach((number, index) => {
+      Console.print(`${STATIC_MESSAGE[index]} ${number}개`);
+    });
   },
   printRate(rate) {
     Console.print(`총 수익률은 ${rate}%입니다.`);

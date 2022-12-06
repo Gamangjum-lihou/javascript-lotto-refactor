@@ -1,18 +1,24 @@
+const compareNumber = require('./Util/compareNumber');
+
 class Lotto {
-  #numbers;
+  #numbers = {
+    main: null,
+    bonus: null,
+  };
 
-  constructor(numbers) {
-    this.validate(numbers);
-    this.#numbers = numbers;
+  constructor(mainNumber, bonusNumber) {
+    this.#numbers.main = new Set(mainNumber.toString().split(',').map(Number));
+    this.#numbers.bonus = Number(bonusNumber);
   }
 
-  validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-  }
+  compare(playerLottery) {
+    const winList = [];
+    playerLottery.forEach((player) => {
+      winList.push(compareNumber(this.#numbers, player));
+    });
 
-  // TODO: 추가 기능 구현
+    return winList;
+  }
 }
 
 module.exports = Lotto;

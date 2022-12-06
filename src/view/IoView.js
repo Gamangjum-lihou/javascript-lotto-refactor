@@ -1,21 +1,28 @@
 const { Console } = require('@woowacourse/mission-utils');
+const errorHandler = require('../ErrorHandler');
 
 const IoView = {
   readPurChase(callback) {
-    Console.readLine('구입금액을 입력해 주세요.', (input) => callback(input));
+    Console.readLine('구입금액을 입력해 주세요.\n', (input) => {
+      errorHandler(callback, IoView.readPurChase, input);
+    });
   },
   readWinngNumber(callback) {
-    Console.readLine('당첨 번호를 입력해 주세요.', (input) => callback(input));
+    Console.readLine('\n당첨 번호를 입력해 주세요.\n', (input) => {
+      errorHandler(callback, IoView.readWinngNumber, input);
+    });
   },
   readBonusNumber(callback) {
-    Console.readLine('보너스 번호를 입력해 주세요.', (input) => callback(input));
+    Console.readLine('보너스 번호를 입력해 주세요.\n', (input) => {
+      errorHandler(callback, IoView.readBonusNumber, input);
+    });
   },
   printPurChaseList(lottos) {
-    Console.print(`${lottos.length}개를 구매했습니다.`);
-    lottos.forEach((lotto) => Console.print(lotto));
+    Console.print(`\n${lottos.length}개를 구매했습니다.`);
+    lottos.forEach((lotto) => Console.print(`[${lotto.join(', ')}]`));
   },
   printWinningStatistics(winningStatistics) {
-    Console.print('당첨 통계');
+    Console.print('\n당첨 통계');
     Console.print('---');
     Console.print(`3개 일치 (5,000원) - ${winningStatistics[0]}개`);
     Console.print(`4개 일치 (50,000원) - ${winningStatistics[1]}개`);
@@ -26,9 +33,6 @@ const IoView = {
   printRate(rate) {
     Console.print(`총 수익률은 ${rate}%입니다.`);
     Console.close();
-  },
-  printError(message) {
-    Console.print(`[ERROR] ${message}`);
   },
 };
 

@@ -28,7 +28,7 @@ class LottoIssuer {
 
   #issue(number) {
     while (this.#Lottos.length < number) {
-      this.#Lottos.push(Random.pickUniqueNumbersInRange(1, 45, 6));
+      this.#Lottos.push(Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
     }
   }
 

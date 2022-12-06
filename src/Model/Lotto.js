@@ -3,6 +3,8 @@ const LottoNumberGenerator = require('../LottonNumberGenerator');
 class Lotto {
   #numbers;
 
+  #winningNumber;
+
   #amountPurchased;
 
   runAmountPurchasedProcess(input) {
@@ -20,6 +22,10 @@ class Lotto {
 
   #ascendingOrder(numbers) {
     this.#numbers = numbers.filter((number) => number.sort((pre, cur) => pre - cur));
+  }
+
+  saveWinningNumbers(input) {
+    this.#winningNumber = input;
   }
 
   getIssudNumbers() {

@@ -9,14 +9,14 @@ class LottoResult {
     lottos.forEach((lotto) => {
       const value = numbers.filter((number) => lotto.includes(number)).length;
       if (value === 5) {
-        LottoResult.#checkBonus(lotto, bonus);
+        this.#checkBonus(lotto, bonus);
         return;
       }
       this.#rate[value] += 1;
     });
   }
 
-  static #checkBonus(lotto, bonus) {
+  #checkBonus(lotto, bonus) {
     if (lotto.includes(bonus)) {
       this.#rate[7] += 1;
       return;

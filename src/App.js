@@ -7,7 +7,7 @@ const { resultMessageFormmatter } = require('./lib/utils/formatter');
 const View = require('./View');
 const { getRate } = require('./lib/utils/gameSystem');
 
-class App {
+class App2 {
   lottoStore;
 
   lotto;
@@ -16,22 +16,51 @@ class App {
 
   constructor() {
     this.view = new View();
+    return new Proxy(this, handler);
   }
 
   play() {
-    this.inputPrice();
+    const handlerList = [
+      {
+        type: 'price',
+        loginHandler: (input) => {
+          try {
+            this.lottoStore = new LottoStore(input);
+            this.printLottoCountAndList();
+            this.inputLotto(handlerList[1]);
+          } catch (err) {
+            this.errorHandler(err, this.inputPrice.bind(this, handlerList[0]));
+          }
+        },
+      },
+      {
+        type: 'lotto',
+        loginHandler: (input) => {
+          try {
+            this.lotto = new Lotto(input);
+            this.inputBonus(handlerList[2]);
+          } catch (err) {
+            this.errorHandler(err, this.inputLotto.bind(this, handlerList[1]));
+          }
+        },
+      },
+      {
+        type: 'bonus',
+        loginHandler: (input) => {
+          try {
+            this.bonus = new Bonus(input);
+            this.printResult();
+          } catch (err) {
+            this.errorHandler(err, this.inputBonus.bind(this, handlerList[2]));
+          }
+        },
+      },
+    ];
+
+    this.inputPrice(handlerList[0]);
   }
 
-  inputPrice() {
-    const handler = (input) => {
-      try {
-        this.lottoStore = new LottoStore(input);
-        this.printLottoCountAndList();
-        this.inputLotto();
-      } catch (err) {
-        this.errorHandler(err, this.inputPrice.bind(this));
-      }
-    };
+  inputPrice(handler) {
     this.view.input.readLine(INPUT_MESSAGE.price, handler);
   }
 
@@ -40,27 +69,11 @@ class App {
     this.view.output.printLottoList(this.lottoStore.getLottosMessage());
   }
 
-  inputLotto() {
-    const handler = (input) => {
-      try {
-        this.lotto = new Lotto(input);
-        this.inputBonus();
-      } catch (err) {
-        this.errorHandler(err, this.inputLotto.bind(this));
-      }
-    };
+  inputLotto(handler) {
     this.view.input.readLine(LINE_BREAK + INPUT_MESSAGE.lotto, handler);
   }
 
-  inputBonus() {
-    const handler = (input) => {
-      try {
-        this.bonus = new Bonus(input);
-        this.printResult();
-      } catch (err) {
-        this.errorHandler(err, this.inputBonus.bind(this));
-      }
-    };
+  inputBonus(handler) {
     this.view.input.readLine(LINE_BREAK + INPUT_MESSAGE.bonus, handler);
   }
 
@@ -99,4 +112,14 @@ class App {
   }
 }
 
-module.exports = App;
+const handler = {
+  get(target, prop) {
+    return !App2.prototype.hasOwnProperty(prop) || (prop.indexOf('input') === -1)
+      ? target[prop]
+      : function ({ loginHandler }) {
+        target[prop](loginHandler);
+      };
+  },
+};
+
+module.exports = App2;

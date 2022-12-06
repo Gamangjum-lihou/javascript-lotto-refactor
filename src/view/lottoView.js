@@ -6,7 +6,7 @@ const lottoView = {
   },
 
   lottoResult(lottos) {
-    return lottos.map((lotto) => JSON.stringify(lotto.getLotto())).join('\n');
+    return lottos.map((lotto) => `[${lotto.getLotto().join(', ')}]`).join('\n');
   },
 };
 

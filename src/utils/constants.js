@@ -8,7 +8,7 @@ const LOTTO = Object.freeze({
 
 const MESSAGE = Object.freeze({
   start: '구입금액을 입력해 주세요.\n',
-  buy: (num) => `\n${num}개를 구입했습니다.\n`,
+  buy: (num) => `\n${num}개를 구매했습니다.\n`,
   win: '\n당첨 번호를 입력해주세요.\n',
   bonus: '\n보너스 번호를 입력해주세요.\n',
   start_statics: `당첨 통계\n---\n`,

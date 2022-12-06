@@ -4,11 +4,11 @@ const rankView = {
   getView(rank) {
     let message = '';
 
-    for (let i = 0; i < 6; i++) {
-      message += MESSAGE.rank[String(i)](rank.has(i) ? rank.get(i) : 0);
+    for (let i = 5; i >= 1; i--) {
+      message += MESSAGE.rank[i.toString()](rank.has(i) ? rank.get(i) : 0);
     }
 
-    return MESSAGE.startStatics + message;
+    return MESSAGE.start_statics + message;
   },
 };
 

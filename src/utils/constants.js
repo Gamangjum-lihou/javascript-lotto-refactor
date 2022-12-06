@@ -11,6 +11,7 @@ const MESSAGE = Object.freeze({
   buy: (num) => `\n${num}개를 구입했습니다.\n`,
   win: '\n당첨 번호를 입력해주세요.\n',
   bonus: '\n보너스 번호를 입력해주세요.\n',
+  start_statics: `당첨 통계\n ---\n`,
   rank: {
     5: (num) => `3개 일치 (5,000원) - ${num}개\n`,
     4: (num) => `4개 일치 (50,000원) - ${num}개\n`,
@@ -18,7 +19,7 @@ const MESSAGE = Object.freeze({
     2: (num) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${num}개\n`,
     1: (num) => `6개 일치 (2,000,000,000원) - ${num}개\n`,
   },
-  startStatics: `당첨 통계\n ---\n`,
+  profit_rate: (percent) => `총 수익률은 ${percent}%입니다.`,
 });
 
 const ERROR = Object.freeze({
@@ -31,4 +32,12 @@ const ERROR = Object.freeze({
   not_range: '번호는 1 ~ 45 사이이어야 합니다.',
 });
 
-module.exports = { LOTTO, MESSAGE, ERROR };
+const PRIZE = Object.freeze({
+  1: 2000000000,
+  2: 30000000,
+  3: 1500000,
+  4: 50000,
+  5: 5000,
+});
+
+module.exports = { LOTTO, MESSAGE, ERROR, PRIZE };

@@ -11,6 +11,7 @@ class InputView {
   inputMoney() {
     Console.readLine(MESSAGE.start, (input) => {
       handleError(() => NumberValidator.validate(input), this.inputMoney);
+
       this.#lottoController.buyLotto(input);
       this.inputWinNumbers();
     });
@@ -30,8 +31,10 @@ class InputView {
   inputBonusNumber() {
     Console.readLine(MESSAGE.bonus, (input) => {
       handleError(() => NumberValidator.validate(input), this.inputBonusNumber);
+
       this.#lottoController.inputBonusNumber(input);
       this.#lottoController.getStatics();
+      Console.close();
     });
   }
 }

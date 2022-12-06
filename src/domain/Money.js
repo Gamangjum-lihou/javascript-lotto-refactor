@@ -26,6 +26,10 @@ class Money {
   getLottoCount() {
     return this.#money / LOTTO.price;
   }
+
+  getProfitRate(profit) {
+    return profit / this.#money;
+  }
 }
 
 module.exports = Money;

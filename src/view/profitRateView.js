@@ -8,9 +8,9 @@ const STATICS = Object.freeze({
 
 const profitRateView = {
   getView(profitRate) {
-    const { percent, unitRegex, point } = STATICS;
+    const { percent, unit_regex, point } = STATICS;
 
-    const rate = (profitRate / percent).toFixed(point).replace(unitRegex, ',');
+    const rate = (profitRate / percent).toFixed(point).replace(unit_regex, ',');
 
     return MESSAGE.profit_rate(rate);
   },

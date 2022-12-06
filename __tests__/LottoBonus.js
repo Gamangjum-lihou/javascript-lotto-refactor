@@ -1,5 +1,5 @@
 const { MissionUtils } = require('@woowacourse/mission-utils');
-const Lotto = require('../src/model/Lotto');
+const LottoBonus = require('../src/model/LottoBonus');
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
@@ -19,41 +19,33 @@ const getOutput = (logSpy) => {
 
 const runException = (inputs) => {
   const logSpy = getLogSpy();
-  new Lotto(inputs);
+  new LottoBonus(inputs[0], inputs[1]);
 
   expectLogContains(getOutput(logSpy), ['[ERROR]']);
 };
 
 describe('로또 클래스 테스트', () => {
-  test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
-    expect(() => {
-      runException(['1,2,3,4,5,6,7']);
-    });
-  });
-
-  // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
   test('로또 번호에 중복된 숫자가 있으면 예외가 발생한다.', () => {
     expect(() => {
-      new Lotto('1,2,3,4,5,5');
-      runException();
+      runException(['4', '4']);
     });
   });
 
   test('로또 번호에 1~45범위가 아닌 숫자가 있으면 예외가 발생한다.', () => {
     expect(() => {
-      new Lotto('1,2,3,4,5,55');
+      new Lotto(['46', '1']);
       runException();
     });
   });
 
-  test('로또 번호를 가지고 오는 getNumbers 매서드가 정상적으로 동작한다.', () => {
+  test('보너스 번호를 가지고 오는 getNumber 매서드가 정상적으로 동작한다.', () => {
     // 준비(arrange)
-    const lotto = new Lotto('1,2,3,4,5,6');
+    const lottoBonus = new LottoBonus('4', '12');
 
     // 실행(act)
-    const result = lotto.getNumbers();
+    const result = lottoBonus.getNumber();
 
     // 검증(assert)
-    expect(result).toEqual(['1', '2', '3', '4', '5', '6']);
+    expect(result).toEqual('4');
   });
 });

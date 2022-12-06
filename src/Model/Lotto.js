@@ -50,6 +50,8 @@ class Lotto {
     return this.#numbers;
   }
 
+  // 시간부족
+
   calculateResult() {
     this.#numbers.forEach((number) => {
       const result = this.#winningNumbers.split(',').reduce((acc, cur, index) => {

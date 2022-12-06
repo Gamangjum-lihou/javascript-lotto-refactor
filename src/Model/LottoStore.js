@@ -3,7 +3,7 @@ const { PRICE_UNIT } = require('../lib/constants/system');
 const { lottoListFormatter } = require('../lib/utils/formatter');
 const { createRandomLotto } = require('../lib/utils/gameSystem');
 const {
-  isNumber, isUnitNumber,
+  isNumber, isUnitNumber, isMinNumber,
 } = require('../lib/utils/validation');
 const ValidationError = require('../ValidationError');
 
@@ -23,6 +23,9 @@ class Account {
   validate() {
     if (!isNumber(this.#account)) {
       throw new ValidationError(MESSAGE.number);
+    }
+    if (isMinNumber(PRICE_UNIT, this.#account)) {
+      throw new ValidationError(MESSAGE.min);
     }
     if (!isUnitNumber(this.#account)) {
       throw new ValidationError(MESSAGE.unit);

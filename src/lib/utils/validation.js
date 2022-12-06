@@ -34,6 +34,8 @@ const isOverlap = (numbers) => {
   return numbers.length !== setNumbers.size;
 };
 
+const isMinNumber = (min, ele) => min > ele;
+
 module.exports = {
   isNumber,
   isNumberArray,
@@ -42,4 +44,5 @@ module.exports = {
   isRangeNumber,
   isUnitNumber,
   isOverlap,
+  isMinNumber,
 };

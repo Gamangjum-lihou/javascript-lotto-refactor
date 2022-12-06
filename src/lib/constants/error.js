@@ -8,6 +8,7 @@ const MESSAGE = Object.freeze({
   count: '로또 번호는 6개여야 합니다.',
   range: `${RANGE.min}부터 ${RANGE.max}까지의 숫자를 입력해주세요.`,
   overlap: '중복되지 않는 숫자를 입력해주세요.',
+  min: `${PRICE_UNIT} 이상 입력해주세요.`,
 });
 
 module.exports = {

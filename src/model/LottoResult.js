@@ -26,13 +26,19 @@ class LottoResult {
 
   calculateRate(lottoCount) {
     const money = [5000, 50000, 1500000, 30000000, 2000000000];
-    const sortedRate = this.#rate.splice(5, 0, this.#rate[7]).slice(3, 7);
-    const total = sortedRate.reduce((acc, count) => money.forEach((unit) => acc + count * unit), 0);
-    return total / lottoCount;
+    const sortedRate = this.getResult();
+    const total = sortedRate.reduce((acc, count, index) => acc + count * money[index], 0);
+    const rate = (total / lottoCount / 10).toLocaleString(undefined, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
+    return rate;
   }
 
-  getRate() {
-    return this.#rate.splice(5, 0, this.#rate[7]).slice(3, 7);
+  getResult() {
+    const rate = this.#rate.slice(3, 8);
+    [rate[3], rate[4]] = [rate[4], rate[3]];
+    return rate;
   }
 }
 

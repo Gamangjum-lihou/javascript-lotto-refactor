@@ -1,15 +1,15 @@
 class LottoBonus {
   #number = null;
 
-  constructor(number) {
+  constructor(number, winningNumber) {
     this.#number = number;
-    this.#validate();
+    this.#validate(winningNumber);
   }
 
-  #validate() {
+  #validate(winningNumber) {
     this.#checkNumber();
     this.#checkRange();
-    this.#checkDuplicate();
+    this.#checkDuplicate(winningNumber);
   }
 
   #checkNumber() {

@@ -27,7 +27,7 @@ const ERROR = Object.freeze({
   win_number: '쉼표로 구분된 숫자로 입력해주세요.',
   money_unit: '로또 구입 금액은 1000원 단위입니다.',
   money_limit: '로또 구입 금액은 최대 1,000,000,000원 까지입니다.',
-  lotto_length: '로또 길이가 6개가 아닙니다.',
+  lotto_length: '로또 번호 길이가 6개가 아닙니다.',
   lotto_duplicate: '로또가 중복되었습니다.',
   not_range: '번호는 1 ~ 45 사이이어야 합니다.',
 });

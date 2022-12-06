@@ -10,6 +10,10 @@ const View = {
     InputView.readLine(INPUT_MESSAGE.purchase, callback);
   },
 
+  printIssudNumbers(input) {
+    input.forEach((number) => OutputView.print(number));
+  },
+
   printError(error) {
     OutputView.printError(error);
   },

@@ -27,7 +27,8 @@ class LottoController {
 
   #readPurchaseAmount(input) {
     if (this.#hasErrorOccurredByCheck(input)) return this.#inputPurchaseAmount();
-    this.#model.saveAmountPurchased(input);
+    this.#model.runAmountPurchasedProcess(input);
+    this.#view.printIssudNumbers(this.#model.getIssudNumbers());
   }
 
   #hasErrorOccurredByCheck(input) {

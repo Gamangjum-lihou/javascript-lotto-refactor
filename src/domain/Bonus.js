@@ -4,13 +4,14 @@ const { LOTTO, ERROR } = require('../utils/constants');
 class Bonus {
   #number;
 
-  constructor(number) {
-    this.validate(number);
-    this.#number = Number(number);
+  constructor(bonus, win) {
+    this.validate(bonus, win);
+    this.#number = Number(bonus);
   }
 
-  validate(number) {
-    if (!this.#isInRange(number)) throw new ValidationError(ERROR.not_range);
+  validate(bonus, win) {
+    if (win.hasNumber(bonus)) throw new ValidationError(ERROR.bonus_duplicate);
+    if (!this.#isInRange(bonus)) throw new ValidationError(ERROR.not_range);
   }
 
   #isInRange(number) {

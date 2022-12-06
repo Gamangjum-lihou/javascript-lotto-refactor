@@ -1,7 +1,7 @@
 const Money = require('./domain/Money');
 const Lotto = require('./Lotto');
 const Bonus = require('./domain/Bonus');
-const WinLotto = require('./domain/WinLotto');
+const Statics = require('./domain/Statics');
 const { generate } = require('./RandomLottoGenerator');
 
 class LottoService {
@@ -13,7 +13,7 @@ class LottoService {
 
   #bonus;
 
-  #winLotto;
+  #statics;
 
   getLottoCount(input) {
     this.#money = new Money(input);
@@ -33,16 +33,17 @@ class LottoService {
   }
 
   inputBonusNumber(number) {
-    this.#bonus = new Bonus(number);
-    this.#winLotto = new WinLotto(this.#win, this.#bonus.getBonus());
+    this.#bonus = new Bonus(number, this.#win);
   }
 
   getRank() {
-    return this.#winLotto.getRank(this.#lottos);
+    this.#statics = new Statics(this.#win, this.#bonus.getBonus());
+
+    return this.#statics.getRank(this.#lottos);
   }
 
   getProfitRate() {
-    const profit = this.#winLotto.getPrize(this.#lottos);
+    const profit = this.#statics.getPrize(this.#lottos);
 
     return this.#money.getProfitRate(profit);
   }

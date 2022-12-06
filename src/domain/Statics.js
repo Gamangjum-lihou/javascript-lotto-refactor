@@ -1,6 +1,16 @@
 const { PRIZE } = require('../utils/constants');
 
-class WinLotto {
+const RANKING = Object.freeze({
+  first: 1,
+  second: 2,
+  third: 3,
+  fourth: 4,
+  fifth: 5,
+  sixth: 6,
+  none: -1,
+});
+
+class Statics {
   #win;
 
   #bonus;
@@ -12,6 +22,7 @@ class WinLotto {
 
   getRank(lottos) {
     const ranks = lottos.map((lotto) => this.#getRankFromWinAndBounus(lotto));
+
     return this.#getRankMap(ranks);
   }
 
@@ -19,8 +30,8 @@ class WinLotto {
     const duplicate = lotto.getDuplicate(this.#win);
     const hasBonus = lotto.hasNumber(this.#bonus);
 
-    if (duplicate === 5) {
-      return hasBonus ? 2 : 3;
+    if (duplicate === RANKING.fifth) {
+      return hasBonus ? RANKING.second : RANKING.third;
     }
 
     return this.#getRankFromDuplicate(duplicate);
@@ -37,25 +48,25 @@ class WinLotto {
   }
 
   #getRankFromDuplicate(duplicate) {
-    if (duplicate === 6) return 1;
+    if (duplicate === 6) return RANKING.first;
 
-    if (duplicate === 5) return 3;
+    if (duplicate === 4) return RANKING.fourth;
 
-    if (duplicate === 4) return 4;
+    if (duplicate === 3) return RANKING.fifth;
 
-    if (duplicate === 3) return 5;
+    return RANKING.none;
   }
 
   getPrize(lottos) {
     const ranks = this.getRank(lottos);
     let prize = 0;
 
-    ranks.forEach((rank) => {
-      prize += PRIZE[rank.toString()];
+    ranks.forEach((_, rank) => {
+      if (rank !== RANKING.none) prize += PRIZE[rank.toString()];
     });
 
     return prize;
   }
 }
 
-module.exports = WinLotto;
+module.exports = Statics;

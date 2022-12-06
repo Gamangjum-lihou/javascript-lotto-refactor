@@ -6,6 +6,7 @@ const View = require('../VIew');
 
 const AMOUNT = 'checkPurcahseAmount';
 const WINNING = 'checkWinningNumbers';
+const Bonus = 'checkBonusNumber';
 class LottoController {
   #model;
 
@@ -40,12 +41,24 @@ class LottoController {
 
   #readWinningNumbers(input) {
     if (this.#hasErrorOccurredByCheck(input, WINNING)) return this.#retry('winning');
-    this.#model.saveWinningNumbers();
+    this.#model.saveWinningNumbers(input);
+    this.#inputBonusNumber(input);
   }
 
-  #hasErrorOccurredByCheck(input, name) {
+  #inputBonusNumber(winning) {
+    this.#view.readLottoBonusNumber((input) => this.#readBonusNumber({ input, winning }));
+  }
+
+  #readBonusNumber({ input, winning }) {
+    if (this.#hasErrorOccurredByCheck(input, Bonus, winning)) return this.#retry('bonus', winning);
+    this.#model.saveBonusNumbers(input);
+    this.#model.calculateResult();
+    this.#view.printResult(this.#model.getResult());
+  }
+
+  #hasErrorOccurredByCheck(input, name, winning = null) {
     try {
-      this.#validator[name](input);
+      this.#validator[name](input, winning);
     } catch (error) {
       return this.#handleError(error);
     }
@@ -59,9 +72,10 @@ class LottoController {
     throw error;
   }
 
-  #retry(input) {
+  #retry(input, winning = null) {
     if (input === 'amount') return this.#inputPurchaseAmount();
     if (input === 'winning') return this.#inputWinningNumbers();
+    if (input === 'bonus') return this.#inputBonusNumber(winning);
   }
 }
 

@@ -9,7 +9,7 @@ const ERROR_MESSAGE = {
   duplication: '중복된 숫자가 존재합니다.',
 };
 
-const WinningNumbers = {
+const Winning = {
   checkInput(input) {
     const spliInput = this.splitUsingComma(input);
     this.checkDistinguishedByCommas(spliInput);
@@ -55,4 +55,4 @@ const WinningNumbers = {
   },
 };
 
-module.exports = WinningNumbers;
+module.exports = Winning;

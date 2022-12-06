@@ -1,5 +1,6 @@
 const PurchaseAmount = require('./PurchaseAmount');
-const WinningNumbers = require('./WinningNumbers');
+const Winning = require('./Winning');
+const Bonus = require('./Bonus');
 
 const Validator = {
   checkPurcahseAmount(input) {
@@ -7,7 +8,11 @@ const Validator = {
   },
 
   checkWinningNumbers(input) {
-    WinningNumbers.checkInput(input);
+    Winning.checkInput(input);
+  },
+
+  checkBonusNumber(input, bonus) {
+    Bonus.checkInput(input, bonus);
   },
 };
 

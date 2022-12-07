@@ -7,7 +7,25 @@ const { resultMessageFormmatter } = require('./lib/utils/formatter');
 const View = require('./View');
 const { getRate } = require('./lib/utils/gameSystem');
 
-class App2 {
+const AppHandler = {
+  get(target, prop) {
+    if (prop.indexOf('input') > -1) {
+      return (args) => {
+        const customFunction = (input) => {
+          try {
+            return args.handler(input);
+          } catch (error) {
+            target.view.output.print(error.message + LINE_BREAK);
+            return target[prop](customFunction);
+          }
+        };
+        target[prop](customFunction);
+      };
+    }
+    return target[prop];
+  },
+};
+class App {
   lottoStore;
 
   lotto;
@@ -16,43 +34,31 @@ class App2 {
 
   constructor() {
     this.view = new View();
-    return new Proxy(this, handler);
+    return new Proxy(this, AppHandler);
   }
 
   play() {
     const handlerList = [
       {
         type: 'price',
-        loginHandler: (input) => {
-          try {
-            this.lottoStore = new LottoStore(input);
-            this.printLottoCountAndList();
-            this.inputLotto(handlerList[1]);
-          } catch (err) {
-            this.errorHandler(err, this.inputPrice.bind(this, handlerList[0]));
-          }
+        handler: (input) => {
+          this.lottoStore = new LottoStore(input);
+          this.printLottoCountAndList();
+          this.inputLotto(handlerList[1]);
         },
       },
       {
         type: 'lotto',
-        loginHandler: (input) => {
-          try {
-            this.lotto = new Lotto(input);
-            this.inputBonus(handlerList[2]);
-          } catch (err) {
-            this.errorHandler(err, this.inputLotto.bind(this, handlerList[1]));
-          }
+        handler: (input) => {
+          this.lotto = new Lotto(input);
+          this.inputBonus(handlerList[2]);
         },
       },
       {
         type: 'bonus',
-        loginHandler: (input) => {
-          try {
-            this.bonus = new Bonus(input);
-            this.printResult();
-          } catch (err) {
-            this.errorHandler(err, this.inputBonus.bind(this, handlerList[2]));
-          }
+        handler: (input) => {
+          this.bonus = new Bonus(input);
+          this.printResult();
         },
       },
     ];
@@ -112,14 +118,4 @@ class App2 {
   }
 }
 
-const handler = {
-  get(target, prop) {
-    return !App2.prototype.hasOwnProperty(prop) || (prop.indexOf('input') === -1)
-      ? target[prop]
-      : function ({ loginHandler }) {
-        target[prop](loginHandler);
-      };
-  },
-};
-
-module.exports = App2;
+module.exports = App;

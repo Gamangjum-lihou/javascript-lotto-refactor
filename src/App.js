@@ -1,5 +1,13 @@
+const InputView = require('./view/InputView');
+
 class App {
-  play() {}
+  play() {
+    const view = new InputView();
+    view.inputMoney();
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;

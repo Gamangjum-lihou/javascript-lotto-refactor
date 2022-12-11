@@ -44,6 +44,7 @@ class Calculator {
         });
     }
 
+    
     getResult() {
         const rateOfReturn = this.#rateOfReturn
         const result = this.#result

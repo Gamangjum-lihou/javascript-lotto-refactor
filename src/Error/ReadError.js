@@ -11,4 +11,3 @@ class ReadError extends Error {
 }
 
 module.exports = ReadError;
-

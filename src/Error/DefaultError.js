@@ -6,4 +6,3 @@ class DefaultError extends Error {
 }
 
 module.exports = DefaultError;
-

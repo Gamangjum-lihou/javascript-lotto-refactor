@@ -1,4 +1,5 @@
 const LottoNumberGenerator = require('../LottonNumberGenerator');
+
 const Calculator = require("./Util/Calculator")
 
 class Lotto {
